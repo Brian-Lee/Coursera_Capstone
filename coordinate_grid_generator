@@ -34,19 +34,20 @@ while (current_lat <= ulat) and (current_lon <= ulon) and (current_lat >= llat) 
     current_lat, current_lon = destination.latitude, destination.longitude
 
 map = folium.Map(location=[ulat, ulon], zoom_start=10)
+points = pd.DataFrame(points)
 
 # add markers to map
-for lat, lng in zip(points[0], points[1]):
+for lat, lng in zip(points[0],points[1]):
     #label = '{}, {}'.format(neighborhood, borough)
-    label = folium.Popup(label, parse_html=True)
+    #label = folium.Popup(label, parse_html=True)
     folium.CircleMarker(
         [lat, lng],
         radius=5,
-        popup=label,
+        #popup=label,
         color='blue',
         fill=True,
         fill_color='#3186cc',
         fill_opacity=0.7,
-        parse_html=False).add_to(map_newyork)  
+        parse_html=False).add_to(map)  
     
 map
