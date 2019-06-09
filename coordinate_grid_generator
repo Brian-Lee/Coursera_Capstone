@@ -10,7 +10,7 @@ b=90 #in degrees 90 = east,180=south,270=west
 # given: lat1, lon1, b = bearing in degrees, d = distance in kilometers
 
 def lon_pass(current_lat, current_lon, ulat, ulon):
-    while (current_lat < ulat) and (current_lon < ulon):
+    while (current_lat <= ulat) and (current_lon <= ulon) and (current_lat >= llat) and (current_lon >= llon):
         origin = geopy.Point(current_lat, current_lon)
         destination = VincentyDistance(kilometers=d).destination(origin, b)
 
@@ -18,7 +18,14 @@ def lon_pass(current_lat, current_lon, ulat, ulon):
         print(current_lat, current_lon)
         points.append((current_lat, current_lon))
  
-while (current_lat < ulat) and (current_lon < ulon) and (current_lat > llat) and (current_lon > llon):
+print('about to enter while')
+print(current_lat <= ulat)
+print(current_lon <= ulon)
+print(current_lat >= llat)
+print(current_lon >= llon)
+
+while (current_lat <= ulat) and (current_lon <= ulon) and (current_lat >= llat) and (current_lon >= llon):
+    print('first line of while')
     lon_pass(current_lat, current_lon, ulat, ulon)
     print('new row of coordinates')  
     current_lon=llon#move back to beginning of row   
