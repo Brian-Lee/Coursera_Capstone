@@ -16,5 +16,17 @@ def lon_pass(current_lat, current_lon, ulat, ulon):
         current_lat, current_lon = destination.latitude, destination.longitude
         print(current_lat, current_lon)
         points.append((current_lat, current_lon))
-        
-lon_pass(current_lat, current_lon, ulat, ulon)
+ 
+while (current_lat < ulat) and (current_lon < ulon):
+    lon_pass(current_lat, current_lon, ulat, ulon)
+    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)
+    print('new row of coordinates')
+    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)    
+    current_lon=llon#move back to beginning of row  
+    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)  
+    origin = geopy.Point(current_lat, current_lon)
+    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)    
+    destination = VincentyDistance(kilometers=d).destination(origin, 180)#move south one step for next row
+    current_lat, current_lon = destination.latitude, destination.longitude
+    #print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)
+    #print(llon)
