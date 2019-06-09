@@ -1,10 +1,11 @@
 points = []
 radius = 100 #in meters
-current_lat = llat
+current_lat = ulat
 current_lon = llon
 import geopy
 from geopy.distance import VincentyDistance
 d = radius/1000 #in kilometers
+d=d*10
 b=90 #in degrees 90 = east,180=south,270=west
 # given: lat1, lon1, b = bearing in degrees, d = distance in kilometers
 
@@ -17,16 +18,10 @@ def lon_pass(current_lat, current_lon, ulat, ulon):
         print(current_lat, current_lon)
         points.append((current_lat, current_lon))
  
-while (current_lat < ulat) and (current_lon < ulon):
+while (current_lat < ulat) and (current_lon < ulon) and (current_lat > llat) and (current_lon > llon):
     lon_pass(current_lat, current_lon, ulat, ulon)
-    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)
-    print('new row of coordinates')
-    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)    
-    current_lon=llon#move back to beginning of row  
-    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)  
+    print('new row of coordinates')  
+    current_lon=llon#move back to beginning of row   
     origin = geopy.Point(current_lat, current_lon)
-    print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)    
     destination = VincentyDistance(kilometers=d).destination(origin, 180)#move south one step for next row
     current_lat, current_lon = destination.latitude, destination.longitude
-    #print("-",current_lat,"-",current_lon,"-",ulat,"-",ulon)
-    #print(llon)
