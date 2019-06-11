@@ -15,7 +15,7 @@ current_lon = llon
 import geopy
 from geopy.distance import VincentyDistance
 d = radius/1000 #in kilometers
-d=d*10
+#d=d*10
 b=90 #in degrees 90 = east,180=south,270=west
 # given: lat1, lon1, b = bearing in degrees, d = distance in kilometers
 
